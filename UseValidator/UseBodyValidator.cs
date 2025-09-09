@@ -19,6 +19,12 @@ public class UseBodyValidator : UseValidator
         }
         var ArgumentName = fromBodyParams[0].Name;
         context.ActionArguments.TryGetValue(ArgumentName, out var body);
+
+        if (body == null)
+        {
+            throw new InvalidOperationException($"The ActionArgument '{ArgumentName}' is null. Ensure that the action is called with the appropriate body.");
+        }
+
         return body;
     }
 }

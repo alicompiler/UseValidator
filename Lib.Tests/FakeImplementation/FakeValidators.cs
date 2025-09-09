@@ -23,3 +23,15 @@ public class StringFailValidator : IValidator<string>
         };
     }
 }
+
+public class StringMultiErrorValidator : IValidator<string>
+{
+    public ValidationResult ValidatePayload(string payload)
+    {
+        return new ValidationResult
+        {
+            IsValid = false,
+            Errors = ["bad1", "bad2"]
+        };
+    }
+}

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 public class UseQueryValidator : UseValidator
 {
-    protected override object? GetPayload(ActionExecutingContext context)
+    protected override object GetPayload(ActionExecutingContext context)
     {
         bool IsFromQuery(ParameterDescriptor p) => p.BindingInfo != null &&
             p.BindingInfo.BindingSource != null &&
@@ -20,6 +20,12 @@ public class UseQueryValidator : UseValidator
 
         var ArgumentName = fromQueryParams[0].Name;
         context.ActionArguments.TryGetValue(ArgumentName, out var query);
+
+        if (query == null)
+        {
+            throw new InvalidOperationException($"The ActionArgument '{ArgumentName}' is null. Ensure that the action is called with the appropriate query parameters.");
+        }
+
         return query;
     }
 }

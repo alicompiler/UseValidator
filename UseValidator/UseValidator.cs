@@ -10,15 +10,13 @@ public abstract class UseValidator : ActionFilterAttribute
     public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         var payload = GetPayload(context);
-        if (payload != null)
+
+        var result = Validate(payload);
+        if (result == null || !result.IsValid)
         {
-            var result = Validate(payload);
-            if (result == null || !result.IsValid)
-            {
-                var errors = result == null ? [] : result.Errors;
-                context.Result = new BadRequestObjectResult(errors);
-                return;
-            }
+            var errors = result == null ? [] : result.Errors;
+            context.Result = new BadRequestObjectResult(errors);
+            return;
         }
 
         await next();
@@ -35,5 +33,5 @@ public abstract class UseValidator : ActionFilterAttribute
         return result as ValidationResult;
     }
 
-    protected abstract object? GetPayload(ActionExecutingContext context);
+    protected abstract object GetPayload(ActionExecutingContext context);
 }
