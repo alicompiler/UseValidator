@@ -1,0 +1,23 @@
+### GET /test/query - valid
+GET http://localhost:5000/test/query?Name=John
+
+### GET /test/query - invalid
+GET http://localhost:5000/test/query?Name=bad
+
+### POST /test/body - valid
+POST http://localhost:5000/test/body
+Content-Type: application/json
+
+{
+    "Name": "John"
+}
+
+### POST /test/body - invalid
+POST http://localhost:5000/test/body
+Content-Type: application/json
+
+{
+    "Name": "bad"
+}
+
+
