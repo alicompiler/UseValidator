@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\UseValidator\UseValidator.csproj" />
+        <ProjectReference Include="..\UseValidator\UseValidator.csproj"/>
     </ItemGroup>
 
 </Project>

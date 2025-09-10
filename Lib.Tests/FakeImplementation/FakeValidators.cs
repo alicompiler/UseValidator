@@ -30,8 +30,7 @@ public class StringMultiErrorValidator : IValidator<string>
     {
         return new ValidationResult
         {
-            IsValid = false,
-            Errors = ["bad1", "bad2"]
+            IsValid = false, Errors = ["bad1", "bad2"]
         };
     }
 }

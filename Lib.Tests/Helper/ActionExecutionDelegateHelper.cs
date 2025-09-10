@@ -22,13 +22,14 @@ public class ActionExecutionDelegateHelper
 
         var actionDescriptor = new ControllerActionDescriptor
         {
-            ControllerName = "Test", ActionName = "TestAction",
+            ControllerName = "Test",
+            ActionName = "TestAction",
             Parameters = actionArgs.Select(x => new ParameterDescriptor
             {
                 Name = x.Key,
                 BindingInfo = new BindingInfo
                 {
-                    BindingSource = bindToBodyParamKey == x.Key ? bindTo : BindingSource.Custom,
+                    BindingSource = bindToBodyParamKey == x.Key ? bindTo : BindingSource.Custom
                 }
             }).ToList()
         };

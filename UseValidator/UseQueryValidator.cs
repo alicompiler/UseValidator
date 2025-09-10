@@ -8,9 +8,12 @@ public class UseQueryValidator : UseValidator
 {
     protected override object GetPayload(ActionExecutingContext context)
     {
-        bool IsFromQuery(ParameterDescriptor p) => p.BindingInfo != null &&
-            p.BindingInfo.BindingSource != null &&
-            p.BindingInfo.BindingSource.Id == BindingSource.Query.Id;
+        bool IsFromQuery(ParameterDescriptor p)
+        {
+            return p.BindingInfo != null &&
+                p.BindingInfo.BindingSource != null &&
+                p.BindingInfo.BindingSource.Id == BindingSource.Query.Id;
+        }
 
         var fromQueryParams = context.ActionDescriptor.Parameters.Where(IsFromQuery).ToList();
         if (fromQueryParams.Count != 1)

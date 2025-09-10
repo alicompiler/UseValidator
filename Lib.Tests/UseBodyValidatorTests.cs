@@ -2,6 +2,8 @@ namespace Lib.Tests;
 
 using Helper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using UseValidator;
 
@@ -63,22 +65,23 @@ public class UseBodyValidatorTests
     {
         // build context with one FromBody parameter but without providing ActionArguments
         var context = ActionExecutionDelegateHelper.BuildContext(new Dictionary<string, object?>(), "body", BindingSource.Body);
-        var actionDescriptor = new Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor
+        var actionDescriptor = new ControllerActionDescriptor
         {
             ControllerName = "Test",
             ActionName = "TestAction",
-            Parameters = new List<Microsoft.AspNetCore.Mvc.Abstractions.ParameterDescriptor>
+            Parameters = new List<ParameterDescriptor>
             {
                 new()
                 {
                     Name = "body",
-                    BindingInfo = new Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo
+                    BindingInfo = new BindingInfo
                     {
-                        BindingSource = Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.Body
+                        BindingSource = BindingSource.Body
                     }
                 }
             }
         };
+
         context.ActionDescriptor = actionDescriptor;
 
         var attr = new UseBodyValidator
@@ -115,33 +118,33 @@ public class UseBodyValidatorTests
 
         // multiple: build a context with two FromBody parameters
         var contextMulti = ActionExecutionDelegateHelper.BuildContext(new Dictionary<string, object?>(), "", BindingSource.Custom);
-        var actionDescriptor = new Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor
+        var actionDescriptor = new ControllerActionDescriptor
         {
             ControllerName = "Test",
             ActionName = "TestAction",
-            Parameters = new List<Microsoft.AspNetCore.Mvc.Abstractions.ParameterDescriptor>
+            Parameters = new List<ParameterDescriptor>
             {
                 new()
                 {
                     Name = "q1",
-                    BindingInfo = new Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo
+                    BindingInfo = new BindingInfo
                     {
-                        BindingSource = Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.Body
+                        BindingSource = BindingSource.Body
                     }
                 },
                 new()
                 {
                     Name = "q2",
-                    BindingInfo = new Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo
+                    BindingInfo = new BindingInfo
                     {
-                        BindingSource = Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.Body
+                        BindingSource = BindingSource.Body
                     }
                 }
             }
         };
+
         contextMulti.ActionDescriptor = actionDescriptor;
 
         await Assert.ThrowsAsync<InvalidOperationException>(() => attr.OnActionExecutionAsync(contextMulti, next));
     }
-
 }
