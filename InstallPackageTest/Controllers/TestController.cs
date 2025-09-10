@@ -1,4 +1,4 @@
-namespace TestApi;
+namespace InstallPackageTest;
 
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;

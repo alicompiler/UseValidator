@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 public class UseBodyValidator : UseValidator
 {
-    protected override object? GetPayload(ActionExecutingContext context)
+    protected override object GetPayload(ActionExecutingContext context)
     {
         bool IsFromBody(ParameterDescriptor p)
         {

@@ -1,4 +1,4 @@
-namespace TestApi;
+namespace InstallPackageTest;
 
 public class FakeBaseRequest
 {
