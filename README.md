@@ -12,6 +12,7 @@ Use simple attribute annotations to validate `[FromBody]` and `[FromQuery]` para
 - [Validating request body](#validating-request-body)
 - [Validating query parameters](#validating-query-parameters)
 - [Validator requirements](#validator-requirements)
+- [Fluent Validation Extension](#fluent-validation-extension)
 - [Contributing](#contributing)
 - [License](#license)
 
