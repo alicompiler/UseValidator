@@ -9,7 +9,7 @@ using UseValidator;
 public class TestController
 {
     [HttpGet("query")]
-    [UseQueryValidator(Validator = typeof(FakeValidator))]
+    [UseQueryValidator(ArgumentName = "query", Validator = typeof(FakeValidator))]
     [UsedImplicitly]
     public IActionResult GetWithQuery([FromQuery] FakeBaseRequest query)
     {
@@ -17,7 +17,7 @@ public class TestController
     }
 
     [HttpPost("body")]
-    [UseBodyValidator(Validator = typeof(FakeValidator))]
+    [UseBodyValidator(ArgumentName = "body", Validator = typeof(FakeValidator))]
     [UsedImplicitly]
     public IActionResult PostWithBody([FromBody] FakeBaseRequest body)
     {
