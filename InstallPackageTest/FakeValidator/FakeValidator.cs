@@ -1,22 +1,12 @@
 namespace InstallPackageTest;
 
-using UseValidator;
+using FluentValidation;
+using UseValidatorExtension.FluentValidation;
 
-public class FakeValidator : IValidator<FakeBaseRequest>
+public class FakeValidator : BaseValidator<FakeBaseRequest>
 {
-    public ValidationResult ValidatePayload(FakeBaseRequest payload)
+    public FakeValidator()
     {
-        if (payload.Name == "bad")
-        {
-            return new ValidationResult
-            {
-                IsValid = false, Errors = ["Name cannot be 'bad'"]
-            };
-        }
-
-        return new ValidationResult
-        {
-            IsValid = true, Errors = []
-        };
+        this.RuleFor(x => x.Name).NotEqual("bad").WithMessage("Name cannot be 'bad'");
     }
 }
