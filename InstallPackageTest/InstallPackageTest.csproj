@@ -9,7 +9,7 @@
     <ItemGroup>
         <PackageReference Include="JetBrains.Annotations" Version="2025.2.2"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
-        <PackageReference Include="UseValidator" Version="1.0.0"/>
+        <PackageReference Include="UseValidator" Version="1.0.2"/>
     </ItemGroup>
 
 </Project>
