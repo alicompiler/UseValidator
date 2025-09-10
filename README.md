@@ -19,6 +19,10 @@ Use simple attribute annotations to validate `[FromBody]` and `[FromQuery]` para
 
 ```
 dotnet add package UseValidator
+
+// if you use FluentValidation
+// dotnet add package UseValidatorExtension.FluentValidation
+
 ```
 
 ## What is it?
@@ -66,7 +70,6 @@ Under the hood, both attributes derive from `UseValidator` (an ActionFilterAttri
 - If the `result is null or IsValid == false`, it returns `BadRequestObjectResult(errors)` and prevents the action from
   running.
 
-
 ## Validating request body
 Use `UseBodyValidator` to validate a `[FromBody]` parameter.
 ```
@@ -82,8 +85,6 @@ Use `UseQueryValidator` to validate a `[FromQuery]` parameter object.
 [UseQueryValidator(Validator = typeof(SearchQueryValidator))]
 public IActionResult Search([FromQuery] SearchQuery q) => Ok();
 ```
-
-
 
 ## Validator requirements
 - Implement IValidator<T> and return a ValidationResult.
@@ -112,6 +113,41 @@ public class CreateUserValidator : IValidator<CreateUserRequest>
         };
     }
 }
+```
+
+## Fluent Validation Extension
+
+If you prefer using [FluentValidation](https://fluentvalidation.net/), you can use the `UseValidatorExtension.FluentValidation` package.
+
+Install the package:
+
+```
+dotnet add package UseValidatorExtension.FluentValidation
+```
+
+Then, create a validator by inheriting from `BaseValidator<T>`:
+
+```csharp
+using FluentValidation;
+using UseValidatorExtension.FluentValidation;
+    
+public class CreateUserFluentValidator : BaseValidator<CreateUserRequest>
+{
+    public CreateUserFluentValidator()
+    {
+        RuleFor(x => x.Username)
+            .NotEmpty().WithMessage("Username is required");
+
+        RuleFor(x => x.Age)
+            .GreaterThanOrEqualTo(18).WithMessage("Age must be at least 18");
+    }
+}
+
+// in your controller
+
+[HttpPost("/users")]
+[UseBodyValidator(Validator = typeof(CreateUserFluentValidator))]
+public IActionResult Create([FromBody] CreateUserRequest body) => Ok();
 ```
 
 ## Contributing
