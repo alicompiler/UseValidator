@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageId>UseValidatorExtension.FluentValidation</PackageId>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
         <Authors>Ali Faris</Authors>
         <Company>Ali Faris</Company>
         <Description>
@@ -20,8 +20,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentValidation" Version="12.0.0" />
-      <PackageReference Include="UseValidator" Version="1.0.2" />
+      <PackageReference Include="FluentValidation" Version="12.1.1" />
+      <PackageReference Include="UseValidator" Version="1.0.3" />
     </ItemGroup>
 
 </Project>
